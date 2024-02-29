@@ -8,7 +8,11 @@
   },
   "devDependencies": {
     "@redwoodjs/core": "7.0.4",
-    "@redwoodjs/project-config": "7.0.4"
+    "@redwoodjs/eslint-config": "^7.0.5",
+    "@redwoodjs/project-config": "7.0.4",
+    "eslint-config-standard-with-typescript": "^43.0.1",
+    "node-ssh": "^13.1.0",
+    "prettier-plugin-tailwindcss": "0.4.1"
   },
   "eslintConfig": {
     "extends": "@redwoodjs/eslint-config",

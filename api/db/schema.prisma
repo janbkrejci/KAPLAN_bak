@@ -17,8 +17,33 @@ generator client {
 // Define your own datamodels here and run `yarn redwood prisma migrate dev`
 // to create migrations for them and apply to your dev DB.
 // TODO: Please remove the following example:
-model UserExample {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
+
+model Resource {
+  id           String               @id @default(cuid())
+  name         String               @unique
+  parent       Resource?            @relation("ResourceParent", fields: [parentId], references: [id])
+  parentId     String?
+  children     Resource[]           @relation("ResourceParent")
+  capabilities ResourceCapability[]
+  kind         ResourceKind         @relation(fields: [kindId], references: [id])
+  kindId       String
+  createdAt    DateTime             @default(now())
+  updatedAt    DateTime             @updatedAt
+}
+
+model ResourceKind {
+  id         String     @id @default(cuid())
+  name       String     @unique
+  hourlyCost Float
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+  Resources  Resource[]
+}
+
+model ResourceCapability {
+  id        String     @id @default(cuid())
+  name      String     @unique
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  resources Resource[]
 }

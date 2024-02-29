@@ -30,3 +30,10 @@ yarn rw storybook
 yarn rw prisma-studio
 ```
 [GraphQL Playground](http://localhost:8911/graphql)
+
+```
+yarn rw g types
+```
+
+yarn rw setup deploy baremetal
+yarn rw deploy baremetal production --first-run
