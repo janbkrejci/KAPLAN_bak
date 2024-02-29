@@ -42,6 +42,7 @@ alpine-setup sshd
 apk add yarn
 apk add nodejs-current
 mkdir -p /var/www/app
+yarn global add pm2
 ```
 then
 
