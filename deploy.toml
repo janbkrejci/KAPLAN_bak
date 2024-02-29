@@ -14,15 +14,16 @@
 # See https://redwoodjs.com/docs/deploy/baremetal for more info
 
 [[production.servers]]
-host = "server.com"
+host = "redwood.lab"
 username = "root"
+password = "pokqwdpokqwd"
 agentForward = true
 sides = ["api","web"]
 packageManagerCommand = "yarn"
 monitorCommand = "pm2"
 path = "/var/www/app"
 processNames = ["serve"]
-repo = "git@github.com:jbk/KAPLAN.git"
+repo = "https://github.com/janbkrejci/KAPLAN.git"
 branch = "main"
 keepReleases = 5
 
@@ -34,7 +35,7 @@ keepReleases = 5
 # agentForward = true
 # sides = ["api"]
 # path = "/var/www/app"
-# repo = "git@github.com:redwoodjs/redwood.git"
+# repo = "https://github.com/redwoodjs/redwood.git"
 # branch = "main"
 # processNames = ["api"]
 #

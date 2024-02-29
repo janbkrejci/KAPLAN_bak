@@ -35,5 +35,26 @@ yarn rw prisma-studio
 yarn rw g types
 ```
 
+## Prepare alpine server
+
+```
+alpine-setup sshd
+apk add yarn
+apk add nodejs-current
+mkdir -p /var/www/app
+```
+then
+
+```
 yarn rw setup deploy baremetal
 yarn rw deploy baremetal production --first-run
+# fails, go to /var/www/app/* and
+yarn add -D @redwoodjs/cli-data-migrate@7.0.4 -W
+```
+
+later
+
+```
+yarn rw deploy baremetal production
+```
+
