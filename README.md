@@ -51,6 +51,7 @@ then
 yarn rw deploy baremetal production --first-run
 
 cp /var/www/app/current/ecosystem.config.js /var/www/app
+cd /var/www/app
 pm2 startup
 pm2 save
 reboot
