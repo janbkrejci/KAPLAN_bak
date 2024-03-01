@@ -42,7 +42,7 @@ setup-sshd
 apk add yarn
 apk add git
 apk add nodejs-current
-mkdir -p /var/www/app
+mkdir -p /var/www/app/db
 yarn global add pm2
 ```
 then
