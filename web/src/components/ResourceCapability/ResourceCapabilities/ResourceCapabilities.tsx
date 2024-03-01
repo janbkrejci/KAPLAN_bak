@@ -44,10 +44,11 @@ const ResourceCapabilitiesList = ({
   )
 
   const onDeleteClick = (
-    id: DeleteResourceCapabilityMutationVariables['id']
+    id: DeleteResourceCapabilityMutationVariables['id'],
+    name: String
   ) => {
     if (
-      confirm('Opravdu chcete smazat kompetenci ' + id + '?')
+      confirm('Opravdu chcete smazat kompetenci ' + name + '?')
     ) {
       deleteResourceCapability({ variables: { id } })
     }
@@ -99,7 +100,7 @@ const ResourceCapabilitiesList = ({
                     type="button"
                     title={'Smazat kompetenci ' + resourceCapability.name}
                     className="rw-button rw-button-small rw-button-red"
-                    onClick={() => onDeleteClick(resourceCapability.id)}
+                    onClick={() => onDeleteClick(resourceCapability.id, resourceCapability.name)}
                   >
                     Smazat
                   </button>

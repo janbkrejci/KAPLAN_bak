@@ -37,8 +37,8 @@ const Resource = ({ resource }: Props) => {
     },
   })
 
-  const onDeleteClick = (id: DeleteResourceMutationVariables['id']) => {
-    if (confirm('Opravdu chcete smazat zdroj ' + id + '?')) {
+  const onDeleteClick = (id: DeleteResourceMutationVariables['id'], name: String) => {
+    if (confirm('Opravdu chcete smazat zdroj ' + name + '?')) {
       deleteResource({ variables: { id } })
     }
   }
@@ -90,7 +90,7 @@ const Resource = ({ resource }: Props) => {
         <button
           type="button"
           className="rw-button rw-button-red"
-          onClick={() => onDeleteClick(resource.id)}
+          onClick={() => onDeleteClick(resource.id, resource.name)}
         >
           Smazat
         </button>

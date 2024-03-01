@@ -57,8 +57,7 @@ pm2 save
 reboot
 
 yarn rw setup deploy baremetal production
-# fails, go to /var/www/app/* and
-yarn add -D @redwoodjs/cli-data-migrate@7.0.4 -W
+reboot
 ```
 
 later

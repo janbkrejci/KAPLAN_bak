@@ -37,8 +37,8 @@ const ResourceKind = ({ resourceKind }: Props) => {
     },
   })
 
-  const onDeleteClick = (id: DeleteResourceKindMutationVariables['id']) => {
-    if (confirm('Opravdu chcete smazat typ zdroje ' + id + '?')) {
+  const onDeleteClick = (id: DeleteResourceKindMutationVariables['id'], name: String) => {
+    if (confirm('Opravdu chcete smazat typ zdroje ' + name + '?')) {
       deleteResourceKind({ variables: { id } })
     }
   }
@@ -86,7 +86,7 @@ const ResourceKind = ({ resourceKind }: Props) => {
         <button
           type="button"
           className="rw-button rw-button-red"
-          onClick={() => onDeleteClick(resourceKind.id)}
+          onClick={() => onDeleteClick(resourceKind.id, resourceKind.name)}
         >
           Smazat
         </button>

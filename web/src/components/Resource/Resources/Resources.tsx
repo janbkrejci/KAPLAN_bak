@@ -38,8 +38,8 @@ const ResourcesList = ({ resources }: FindResources) => {
     awaitRefetchQueries: true,
   })
 
-  const onDeleteClick = (id: DeleteResourceMutationVariables['id']) => {
-    if (confirm('Opravdu chcete smazat zdroj ' + id + '?')) {
+  const onDeleteClick = (id: DeleteResourceMutationVariables['id'], name: String) => {
+    if (confirm('Opravdu chcete smazat zdroj ' + name + '?')) {
       deleteResource({ variables: { id } })
     }
   }
@@ -87,7 +87,7 @@ const ResourcesList = ({ resources }: FindResources) => {
                     type="button"
                     title={'Smazat zdroj ' + resource.name}
                     className="rw-button rw-button-small rw-button-red"
-                    onClick={() => onDeleteClick(resource.id)}
+                    onClick={() => onDeleteClick(resource.id, resource.name)}
                   >
                     Smazat
                   </button>

@@ -29,7 +29,7 @@ const NewResourceCapability = () => {
     CREATE_RESOURCE_CAPABILITY_MUTATION,
     {
       onCompleted: () => {
-        toast.success('ResourceCapability created')
+        toast.success('Kompetence byla vytvořena.')
         navigate(routes.resourceCapabilities())
       },
       onError: (error) => {
