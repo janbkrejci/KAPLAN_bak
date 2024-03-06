@@ -37,7 +37,7 @@ const ResourceKind = ({ resourceKind }: Props) => {
     },
   })
 
-  const onDeleteClick = (id: DeleteResourceKindMutationVariables['id'], name: String) => {
+  const onDeleteClick = (id: DeleteResourceKindMutationVariables['id'], name: string) => {
     if (confirm('Opravdu chcete smazat typ zdroje ' + name + '?')) {
       deleteResourceKind({ variables: { id } })
     }

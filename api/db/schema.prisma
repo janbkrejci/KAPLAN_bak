@@ -1,9 +1,3 @@
-// Don't forget to tell Prisma about your edits to this file using
-// `yarn rw prisma migrate dev` or `yarn rw prisma db push`.
-// `migrate` is like committing while `push` is for prototyping.
-// Read more about both here:
-// https://www.prisma.io/docs/orm/prisma-migrate
-
 datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
@@ -11,39 +5,148 @@ datasource db {
 
 generator client {
   provider      = "prisma-client-js"
-  binaryTargets = "native"
+  binaryTargets = ["rhel-openssl-1.0.x"]
 }
 
-// Define your own datamodels here and run `yarn redwood prisma migrate dev`
-// to create migrations for them and apply to your dev DB.
-// TODO: Please remove the following example:
+// Don't forget to tell Prisma about your edits to this file using
+// `yarn rw prisma migrate dev` or `yarn rw prisma db push`.
+// `migrate` is like committing while `push` is for prototyping.
+// Read more about both here:
+// https:
+//                                                           Define your own datamodels here and run `yarn redwood prisma migrate dev`
+//                                                           to create migrations for them and apply to your dev DB.
+//                                                           TODO: Please remove the following example:
+//                   Zdroj
 
 model Resource {
-  id           String               @id @default(cuid())
-  name         String               @unique
-  parent       Resource?            @relation("ResourceParent", fields: [parentId], references: [id])
-  parentId     String?
-  children     Resource[]           @relation("ResourceParent")
-  capabilities ResourceCapability[]
-  kind         ResourceKind         @relation(fields: [kindId], references: [id])
-  kindId       String
-  createdAt    DateTime             @default(now())
-  updatedAt    DateTime             @updatedAt
+  id                            String                         @id @default(cuid())
+  name                          String
+  manager                       Resource?                      @relation(name: "ResourceParent", fields: [managerId], references: [id])
+  managerId                     String?
+  subordinates                  Resource[]                     @relation(name: "ResourceParent")
+  resourceCapabilities          ResourceCapability[]           @relation(name: "ResourceToResourceCapability")
+  resourceKind                  ResourceKind                   @relation(name: "ResourceToResourceKind", fields: [resourceKindId], references: [id])
+  resourceKindId                String
+  activeSince                   DateTime
+  activeUntil                   DateTime?
+  workingHoursSchema            WorkingHoursSchema             @relation(name: "WorkingHoursSchemaToResourceKind", fields: [workingHoursSchemaId], references: [id])
+  workingHoursSchemaId          String
+  resourceLeaves                ResourceLeave[]                @relation(name: "ResourceLeaveToResource")
+  resourceAvailabilityOverrides ResourceAvailabilityOverride[] @relation(name: "ResourceToResourceAvailabilityOverride")
+  organizationalUnit            OrganizationalUnit             @relation(name: "OrganizationalUnitToResource", fields: [organizationalUnitId], references: [id])
+  organizationalUnitId          String
+  createdAt                     DateTime                       @default(now())
+  updatedAt                     DateTime                       @updatedAt
 }
 
+// Typ zdroje s hodinovou sazbou
+
 model ResourceKind {
-  id         String     @id @default(cuid())
-  name       String     @unique
-  hourlyCost Float
-  createdAt  DateTime   @default(now())
-  updatedAt  DateTime   @updatedAt
-  Resources  Resource[]
+  id                      String              @id @default(cuid())
+  name                    String              @unique
+  hourlyCost              Float
+  Resources               Resource[]          @relation(name: "ResourceToResourceKind")
+  createdAt               DateTime            @default(now())
+  updatedAt               DateTime            @updatedAt
+  validResourceLeaveTypes ResourceLeaveType[] @relation(name: "ResourceKindToResourceLeaveType")
 }
+
+// Kompetence zdrojů, podle nich se vybírají kandidáti k úkolům
 
 model ResourceCapability {
   id        String     @id @default(cuid())
   name      String     @unique
+  resources Resource[] @relation(name: "ResourceToResourceCapability")
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
-  resources Resource[]
+}
+
+// Základní schéma dostupnosti zdroje
+// Kromě něj se bere v potaz seznam nepřítomností
+// a seznam ručních úprav dostupnosti
+
+model WorkingHoursSchema {
+  id               String     @id @default(cuid())
+  name             String
+  monday           Float      @default(8)
+  tuesday          Float      @default(8)
+  wednesday        Float      @default(8)
+  thursday         Float      @default(8)
+  friday           Float      @default(8)
+  saturday         Float      @default(0)
+  sunday           Float      @default(0)
+  holidayIfWorkDay Float      @default(0)
+  holidayIfWeekend Float      @default(0)
+  resources        Resource[] @relation(name: "WorkingHoursSchemaToResourceKind")
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
+}
+
+// Nedostupnost zdroje, např. dovolená, oprava letounu
+// apod. Neřeší se schvalování, co je zde, to už platí
+
+model ResourceLeave {
+  id                           String            @id @default(cuid())
+  description                  String?
+  from                         DateTime
+  to                           DateTime
+  firstDayWorkingHours         Float
+  lastDayWorkingHours          Float
+  resourceLeaveApprovalStateId String
+  resourceLeaveType            ResourceLeaveType @relation(name: "ResourceLeaveTypeToResourceLeave", fields: [resourceLeaveTypeId], references: [id])
+  resourceLeaveTypeId          String
+  resource                     Resource          @relation(name: "ResourceLeaveToResource", fields: [resourceId], references: [id])
+  resourceId                   String
+  createdAt                    DateTime          @default(now())
+  updatedAt                    DateTime          @updatedAt
+}
+
+// Číselník důvodů nepřítomnosti,
+// např. Dovolená, Nemoc, Opravy a údržba atd.
+
+model ResourceLeaveType {
+  id                    String          @id @default(cuid())
+  name                  String          @unique
+  resourceLeaves        ResourceLeave[] @relation(name: "ResourceLeaveTypeToResourceLeave")
+  createdAt             DateTime        @default(now())
+  updatedAt             DateTime        @updatedAt
+  validForResourceKinds ResourceKind[]  @relation(name: "ResourceKindToResourceLeaveType")
+}
+
+// Svátky se dají definovat buď jako den a měsíc,
+// pak platí každý rok (např. 25.12.),
+// anebo včetně roku, pak platí v toto konkrétní datum
+// např. 1.4.2024. Pohyblivé jsou jen velikonoce - Velký pátek
+// a Velikonoční pondělí
+
+model NationalHoliday {
+  id    String @id @default(cuid())
+  name  String
+  day   Int
+  month Int
+  year  Int?
+}
+
+// Přebíjí WorkingHoursSchema i NationalHolidays
+
+model ResourceAvailabilityOverride {
+  id                  String     @id @default(cuid())
+  description         String
+  dateFrom            DateTime?
+  dateTo              DateTime?
+  dailyHoursAvailable Float
+  resources           Resource[] @relation(name: "ResourceToResourceAvailabilityOverride")
+}
+
+// Organizační jednotka, hierarchická
+
+model OrganizationalUnit {
+  id                         String               @id @default(cuid())
+  code                       String               @unique
+  name                       String
+  description                String?
+  parentOrganizationalUnit   OrganizationalUnit?  @relation(name: "OrganizationalUnitToOrganizationalUnit", fields: [parentOrganizationalUnitId], references: [id])
+  parentOrganizationalUnitId String?
+  childOrganizationalUnits   OrganizationalUnit[] @relation(name: "OrganizationalUnitToOrganizationalUnit")
+  resources                  Resource[]           @relation(name: "OrganizationalUnitToResource")
 }

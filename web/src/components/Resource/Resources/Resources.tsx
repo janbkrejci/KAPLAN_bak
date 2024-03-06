@@ -38,7 +38,7 @@ const ResourcesList = ({ resources }: FindResources) => {
     awaitRefetchQueries: true,
   })
 
-  const onDeleteClick = (id: DeleteResourceMutationVariables['id'], name: String) => {
+  const onDeleteClick = (id: DeleteResourceMutationVariables['id'], name: string) => {
     if (confirm('Opravdu chcete smazat zdroj ' + name + '?')) {
       deleteResource({ variables: { id } })
     }

@@ -1,11 +1,12 @@
 export const schema = gql`
   type ResourceKind {
-    id: ID!
+    id: String!
     name: String!
     hourlyCost: Float!
+    Resources: [Resource]!
     createdAt: DateTime!
     updatedAt: DateTime!
-    Resources: [Resource]!
+    validResourceLeaveTypes: [ResourceLeaveType]!
   }
 
   type Query {

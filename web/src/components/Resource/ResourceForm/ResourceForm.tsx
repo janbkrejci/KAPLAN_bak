@@ -7,7 +7,6 @@ import {
   FieldError,
   Label,
   TextField,
-  NumberField,
   Submit,
 } from '@redwoodjs/forms'
 

@@ -38,7 +38,7 @@ const ResourceKindsList = ({ resourceKinds }: FindResourceKinds) => {
     awaitRefetchQueries: true,
   })
 
-  const onDeleteClick = (id: DeleteResourceKindMutationVariables['id'], name: String) => {
+  const onDeleteClick = (id: DeleteResourceKindMutationVariables['id'], name: string) => {
     if (confirm('Opravdu chcete smazat typ zdroje ' + name + '?')) {
       deleteResourceKind({ variables: { id } })
     }

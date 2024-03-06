@@ -44,7 +44,7 @@ const ResourceCapability = ({ resourceCapability }: Props) => {
 
   const onDeleteClick = (
     id: DeleteResourceCapabilityMutationVariables['id'],
-    name: String
+    name: string
   ) => {
     if (
       confirm('Opravdu chcete smazat kompetenci ' + name + '?')

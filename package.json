@@ -7,12 +7,24 @@
     ]
   },
   "devDependencies": {
-    "@redwoodjs/cli-data-migrate": "7.0.4",
-    "@redwoodjs/core": "7.0.4",
-    "@redwoodjs/eslint-config": "^7.0.5",
-    "@redwoodjs/project-config": "7.0.4",
+    "@redwoodjs/cli-data-migrate": "7.0.6",
+    "@redwoodjs/core": "7.0.6",
+    "@redwoodjs/eslint-config": "7.0.6",
+    "@redwoodjs/project-config": "7.0.6",
+    "@redwoodjs/studio": "11",
+    "@typescript-eslint/eslint-plugin": "^7.1.1",
+    "@typescript-eslint/parser": "^7.1.1",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
     "eslint-config-standard-with-typescript": "^43.0.1",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-jsx-a11y": "^6.8.0",
+    "eslint-plugin-n": "^16.6.2",
+    "eslint-plugin-prettier": "^5.1.3",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-react": "^7.34.0",
     "node-ssh": "^13.1.0",
+    "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "0.4.1"
   },
   "eslintConfig": {

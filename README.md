@@ -20,6 +20,10 @@ npx create-redwood-app .
 yarn install
 yarn rw setup realtime
 yarn rw setup server-file
+
+nezapomeň si zařídit writable /var/www/app/db adresář
+chmod -p /var/www/app/db
+chown -R jbk /var/www
 ```
 
 spustit

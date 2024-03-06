@@ -32,14 +32,24 @@ describe('resources', () => {
     const result = await createResource({
       input: {
         name: 'String',
-        kindId: scenario.resource.two.kindId,
-        updatedAt: '2024-02-29T10:16:30.489Z',
+        resourceKindId: scenario.resource.two.resourceKindId,
+        activeSince: '2024-03-05T15:40:30.157Z',
+        workingHoursSchemaId: scenario.resource.two.workingHoursSchemaId,
+        organizationalUnitId: scenario.resource.two.organizationalUnitId,
+        updatedAt: '2024-03-05T15:40:30.157Z',
       },
     })
 
     expect(result.name).toEqual('String')
-    expect(result.kindId).toEqual(scenario.resource.two.kindId)
-    expect(result.updatedAt).toEqual(new Date('2024-02-29T10:16:30.489Z'))
+    expect(result.resourceKindId).toEqual(scenario.resource.two.resourceKindId)
+    expect(result.activeSince).toEqual(new Date('2024-03-05T15:40:30.157Z'))
+    expect(result.workingHoursSchemaId).toEqual(
+      scenario.resource.two.workingHoursSchemaId
+    )
+    expect(result.organizationalUnitId).toEqual(
+      scenario.resource.two.organizationalUnitId
+    )
+    expect(result.updatedAt).toEqual(new Date('2024-03-05T15:40:30.157Z'))
   })
 
   scenario('updates a resource', async (scenario: StandardScenario) => {

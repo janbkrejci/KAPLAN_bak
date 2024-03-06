@@ -3,10 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
-    "@redwoodjs/api": "7.0.4",
-    "@redwoodjs/api-server": "7.0.4",
-    "@redwoodjs/graphql-server": "7.0.4",
-    "@redwoodjs/realtime": "7.0.4",
+    "@redwoodjs/api": "7.0.6",
+    "@redwoodjs/api-server": "7.0.6",
+    "@redwoodjs/graphql-server": "7.0.6",
+    "@redwoodjs/realtime": "7.0.6",
     "ioredis": "^5"
   }
 }

@@ -5,16 +5,16 @@ export const standard = defineScenario<Prisma.ResourceKindCreateArgs>({
   resourceKind: {
     one: {
       data: {
-        name: 'String',
-        hourlyCost: 5872127.771426887,
-        updatedAt: '2024-02-29T10:17:12.274Z',
+        name: 'String1020039',
+        hourlyCost: 1838949.8949446103,
+        updatedAt: '2024-03-05T15:40:32.776Z',
       },
     },
     two: {
       data: {
-        name: 'String',
-        hourlyCost: 6605952.474657279,
-        updatedAt: '2024-02-29T10:17:12.274Z',
+        name: 'String6152833',
+        hourlyCost: 3588078.559666783,
+        updatedAt: '2024-03-05T15:40:32.776Z',
       },
     },
   },

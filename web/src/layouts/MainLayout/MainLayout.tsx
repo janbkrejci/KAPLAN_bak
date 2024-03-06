@@ -1,4 +1,3 @@
-import { Menu } from "@headlessui/react"
 import { Link, routes } from "@redwoodjs/router"
 import { DropDownMenu, MenuItem } from "src/components/DropDownMenu/DropDownMenu"
 
@@ -6,9 +5,9 @@ type MainLayoutProps = {
   children?: React.ReactNode
 }
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
+// function classNames(...classes) {
+//   return classes.filter(Boolean).join(' ')
+// }
 
 
 

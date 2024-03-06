@@ -40,11 +40,11 @@ describe('resourceCapabilities', () => {
 
   scenario('creates a resourceCapability', async () => {
     const result = await createResourceCapability({
-      input: { name: 'String', updatedAt: '2024-02-29T10:22:39.713Z' },
+      input: { name: 'String1263779', updatedAt: '2024-03-05T15:40:35.086Z' },
     })
 
-    expect(result.name).toEqual('String')
-    expect(result.updatedAt).toEqual(new Date('2024-02-29T10:22:39.713Z'))
+    expect(result.name).toEqual('String1263779')
+    expect(result.updatedAt).toEqual(new Date('2024-03-05T15:40:35.086Z'))
   })
 
   scenario(
@@ -55,10 +55,10 @@ describe('resourceCapabilities', () => {
       })) as ResourceCapability
       const result = await updateResourceCapability({
         id: original.id,
-        input: { name: 'String2' },
+        input: { name: 'String22616072' },
       })
 
-      expect(result.name).toEqual('String2')
+      expect(result.name).toEqual('String22616072')
     }
   )
 

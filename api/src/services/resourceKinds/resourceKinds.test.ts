@@ -34,15 +34,15 @@ describe('resourceKinds', () => {
   scenario('creates a resourceKind', async () => {
     const result = await createResourceKind({
       input: {
-        name: 'String',
-        hourlyCost: 2647398.649284718,
-        updatedAt: '2024-02-29T10:17:12.268Z',
+        name: 'String9108974',
+        hourlyCost: 7419049.223728591,
+        updatedAt: '2024-03-05T15:40:32.761Z',
       },
     })
 
-    expect(result.name).toEqual('String')
-    expect(result.hourlyCost).toEqual(2647398.649284718)
-    expect(result.updatedAt).toEqual(new Date('2024-02-29T10:17:12.268Z'))
+    expect(result.name).toEqual('String9108974')
+    expect(result.hourlyCost).toEqual(7419049.223728591)
+    expect(result.updatedAt).toEqual(new Date('2024-03-05T15:40:32.761Z'))
   })
 
   scenario('updates a resourceKind', async (scenario: StandardScenario) => {
@@ -51,10 +51,10 @@ describe('resourceKinds', () => {
     })) as ResourceKind
     const result = await updateResourceKind({
       id: original.id,
-      input: { name: 'String2' },
+      input: { name: 'String56077432' },
     })
 
-    expect(result.name).toEqual('String2')
+    expect(result.name).toEqual('String56077432')
   })
 
   scenario('deletes a resourceKind', async (scenario: StandardScenario) => {

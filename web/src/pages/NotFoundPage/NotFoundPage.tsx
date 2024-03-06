@@ -1,4 +1,4 @@
-export default () => (
+const NotFoundPage = () => (
   <main>
     <style
       dangerouslySetInnerHTML={{
@@ -42,3 +42,6 @@ export default () => (
     </section>
   </main>
 )
+
+NotFoundPage.displayName = 'NotFoundPage'
+export default NotFoundPage

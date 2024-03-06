@@ -16,13 +16,13 @@ export const QUERY: TypedDocumentNode<
     resource: resource(id: $id) {
       id
       name
-      parentId
-      parent {
+      managerId
+      manager {
         id
         name
       }
-      kindId
-      kind {
+      resourceKindId
+      resourceKind {
         id
         name
       }

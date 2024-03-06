@@ -5,7 +5,6 @@ import type {
 } from 'types/graphql'
 
 import { db } from 'src/lib/db'
-import { LiveQueryStorageMechanism } from '@redwoodjs/realtime'
 
 export const resourceKinds: QueryResolvers['resourceKinds'] = () => {
   return db.resourceKind.findMany()
@@ -17,48 +16,39 @@ export const resourceKind: QueryResolvers['resourceKind'] = ({ id }) => {
   })
 }
 
-export const createResourceKind: MutationResolvers['createResourceKind'] = async ({
+export const createResourceKind: MutationResolvers['createResourceKind'] = ({
   input,
-},
-  { context }: { context: { liveQueryStore: LiveQueryStorageMechanism } }
-) => {
-  const result = await db.resourceKind.create({
+}) => {
+  return db.resourceKind.create({
     data: input,
   })
-  context.liveQueryStore.invalidate('Query.resourceKinds')
-  return result
 }
 
-export const updateResourceKind: MutationResolvers['updateResourceKind'] = async ({
+export const updateResourceKind: MutationResolvers['updateResourceKind'] = ({
   id,
   input,
-},
-  { context }: { context: { liveQueryStore: LiveQueryStorageMechanism } }
-) => {
-  const result = await db.resourceKind.update({
+}) => {
+  return db.resourceKind.update({
     data: input,
     where: { id },
   })
-  const key = `ResourceKind:${id}`
-  context.liveQueryStore.invalidate(key)
-  return result
 }
 
-export const deleteResourceKind: MutationResolvers['deleteResourceKind'] = async ({
+export const deleteResourceKind: MutationResolvers['deleteResourceKind'] = ({
   id,
-},
-  { context }: { context: { liveQueryStore: LiveQueryStorageMechanism } }
-) => {
-  const result = await db.resourceKind.delete({
+}) => {
+  return db.resourceKind.delete({
     where: { id },
   })
-  const key = `ResourceKind:${id}`
-  context.liveQueryStore.invalidate(key)
-  return result
 }
 
 export const ResourceKind: ResourceKindRelationResolvers = {
   Resources: (_obj, { root }) => {
     return db.resourceKind.findUnique({ where: { id: root?.id } }).Resources()
+  },
+  validResourceLeaveTypes: (_obj, { root }) => {
+    return db.resourceKind
+      .findUnique({ where: { id: root?.id } })
+      .validResourceLeaveTypes()
   },
 }

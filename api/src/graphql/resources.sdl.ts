@@ -1,13 +1,21 @@
 export const schema = gql`
   type Resource {
-    id: ID!
+    id: String!
     name: String!
-    parent: Resource
-    parentId: String
-    children: [Resource]!
-    capabilities: [ResourceCapability]!
-    kind: ResourceKind!
-    kindId: String!
+    manager: Resource
+    managerId: String
+    subordinates: [Resource]!
+    resourceCapabilities: [ResourceCapability]!
+    resourceKind: ResourceKind!
+    resourceKindId: String!
+    activeSince: DateTime!
+    activeUntil: DateTime
+    workingHoursSchema: WorkingHoursSchema!
+    workingHoursSchemaId: String!
+    resourceLeaves: [ResourceLeave]!
+    resourceAvailabilityOverrides: [ResourceAvailabilityOverride]!
+    organizationalUnit: OrganizationalUnit!
+    organizationalUnitId: String!
     createdAt: DateTime!
     updatedAt: DateTime!
   }
@@ -19,14 +27,22 @@ export const schema = gql`
 
   input CreateResourceInput {
     name: String!
-    parentId: String
-    kindId: String!
+    managerId: String
+    resourceKindId: String!
+    activeSince: DateTime!
+    activeUntil: DateTime
+    workingHoursSchemaId: String!
+    organizationalUnitId: String!
   }
 
   input UpdateResourceInput {
     name: String
-    parentId: String
-    kindId: String
+    managerId: String
+    resourceKindId: String
+    activeSince: DateTime
+    activeUntil: DateTime
+    workingHoursSchemaId: String
+    organizationalUnitId: String
   }
 
   type Mutation {

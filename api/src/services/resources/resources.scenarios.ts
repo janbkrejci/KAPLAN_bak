@@ -6,26 +6,40 @@ export const standard = defineScenario<Prisma.ResourceCreateArgs>({
     one: {
       data: {
         name: 'String',
-        updatedAt: '2024-02-29T10:16:30.496Z',
-        kind: {
+        activeSince: '2024-03-05T15:40:30.170Z',
+        updatedAt: '2024-03-05T15:40:30.170Z',
+        resourceKind: {
           create: {
-            name: 'String',
-            hourlyCost: 4993009.7054629205,
-            updatedAt: '2024-02-29T10:16:30.496Z',
+            name: 'String8667330',
+            hourlyCost: 7251808.138794977,
+            updatedAt: '2024-03-05T15:40:30.170Z',
           },
+        },
+        workingHoursSchema: {
+          create: { name: 'String', updatedAt: '2024-03-05T15:40:30.170Z' },
+        },
+        organizationalUnit: {
+          create: { code: 'String1510246', name: 'String' },
         },
       },
     },
     two: {
       data: {
         name: 'String',
-        updatedAt: '2024-02-29T10:16:30.496Z',
-        kind: {
+        activeSince: '2024-03-05T15:40:30.170Z',
+        updatedAt: '2024-03-05T15:40:30.170Z',
+        resourceKind: {
           create: {
-            name: 'String',
-            hourlyCost: 6596379.203900291,
-            updatedAt: '2024-02-29T10:16:30.496Z',
+            name: 'String4440240',
+            hourlyCost: 6313362.408927341,
+            updatedAt: '2024-03-05T15:40:30.170Z',
           },
+        },
+        workingHoursSchema: {
+          create: { name: 'String', updatedAt: '2024-03-05T15:40:30.170Z' },
+        },
+        organizationalUnit: {
+          create: { code: 'String7458815', name: 'String' },
         },
       },
     },

@@ -1,10 +1,10 @@
 export const schema = gql`
   type ResourceCapability {
-    id: ID!
+    id: String!
     name: String!
+    resources: [Resource]!
     createdAt: DateTime!
     updatedAt: DateTime!
-    resources: [Resource]!
   }
 
   type Query {
