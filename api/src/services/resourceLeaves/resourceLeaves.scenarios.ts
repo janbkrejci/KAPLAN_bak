@@ -1,39 +1,29 @@
-import type { Prisma, ResourceLeave } from '@prisma/client'
-import type { ScenarioData } from '@redwoodjs/testing/api'
+import type { Prisma, ResourceLeave } from "@prisma/client";
+import type { ScenarioData } from "@redwoodjs/testing/api";
 
 export const standard = defineScenario<Prisma.ResourceLeaveCreateArgs>({
   resourceLeave: {
     one: {
       data: {
-        from: '2024-03-05T15:40:40.028Z',
-        to: '2024-03-05T15:40:40.028Z',
-        firstDayWorkingHours: 9688858.934652986,
-        lastDayWorkingHours: 9685319.891915334,
-        resourceLeaveApprovalStateId: 'String',
-        updatedAt: '2024-03-05T15:40:40.028Z',
-        resourceLeaveType: {
-          create: {
-            name: 'String3555339',
-            updatedAt: '2024-03-05T15:40:40.028Z',
-          },
-        },
+        description: "String",
+        from: "2024-03-07T16:34:28.502Z",
+        to: "2024-03-07T16:34:28.502Z",
+        firstDayWorkingHours: 1715095.7273115285,
+        lastDayWorkingHours: 6097861.721969608,
         resource: {
           create: {
-            name: 'String',
-            activeSince: '2024-03-05T15:40:40.028Z',
-            updatedAt: '2024-03-05T15:40:40.028Z',
+            name: "String",
+            activeSince: "2024-03-07T16:34:28.502Z",
+            updatedAt: "2024-03-07T16:34:28.502Z",
             resourceKind: {
               create: {
-                name: 'String6873113',
-                hourlyCost: 7840677.690895725,
-                updatedAt: '2024-03-05T15:40:40.028Z',
+                name: "String4313316",
+                hourlyCost: 5248871.886297677,
+                workingHoursSchema: { create: { name: "String" } },
               },
             },
-            workingHoursSchema: {
-              create: { name: 'String', updatedAt: '2024-03-05T15:40:40.028Z' },
-            },
             organizationalUnit: {
-              create: { code: 'String8221740', name: 'String' },
+              create: { code: "String5231101", name: "String" },
             },
           },
         },
@@ -41,41 +31,31 @@ export const standard = defineScenario<Prisma.ResourceLeaveCreateArgs>({
     },
     two: {
       data: {
-        from: '2024-03-05T15:40:40.028Z',
-        to: '2024-03-05T15:40:40.028Z',
-        firstDayWorkingHours: 4455185.601867477,
-        lastDayWorkingHours: 9066654.361647503,
-        resourceLeaveApprovalStateId: 'String',
-        updatedAt: '2024-03-05T15:40:40.028Z',
-        resourceLeaveType: {
-          create: {
-            name: 'String6282378',
-            updatedAt: '2024-03-05T15:40:40.028Z',
-          },
-        },
+        description: "String",
+        from: "2024-03-07T16:34:28.502Z",
+        to: "2024-03-07T16:34:28.502Z",
+        firstDayWorkingHours: 2583584.2412851863,
+        lastDayWorkingHours: 3897983.680526984,
         resource: {
           create: {
-            name: 'String',
-            activeSince: '2024-03-05T15:40:40.028Z',
-            updatedAt: '2024-03-05T15:40:40.028Z',
+            name: "String",
+            activeSince: "2024-03-07T16:34:28.502Z",
+            updatedAt: "2024-03-07T16:34:28.502Z",
             resourceKind: {
               create: {
-                name: 'String1144242',
-                hourlyCost: 5917357.737822895,
-                updatedAt: '2024-03-05T15:40:40.028Z',
+                name: "String2380905",
+                hourlyCost: 1773799.6528381417,
+                workingHoursSchema: { create: { name: "String" } },
               },
             },
-            workingHoursSchema: {
-              create: { name: 'String', updatedAt: '2024-03-05T15:40:40.028Z' },
-            },
             organizationalUnit: {
-              create: { code: 'String3185920', name: 'String' },
+              create: { code: "String5211206", name: "String" },
             },
           },
         },
       },
     },
   },
-})
+});
 
-export type StandardScenario = ScenarioData<ResourceLeave, 'resourceLeave'>
+export type StandardScenario = ScenarioData<ResourceLeave, "resourceLeave">;

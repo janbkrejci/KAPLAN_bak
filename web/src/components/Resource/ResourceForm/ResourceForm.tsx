@@ -53,24 +53,6 @@ const ResourceForm = (props: ResourceFormProps) => {
         <FieldError name="name" className="rw-field-error" />
 
         <Label
-          name="parentId"
-          className="rw-label"
-          errorClassName="rw-label rw-label-error"
-        >
-          Nadřízený
-        </Label>
-
-        <TextField
-          name="parentId"
-          defaultValue={props.resource?.parentId}
-          className="rw-input"
-          errorClassName="rw-input rw-input-error"
-          emptyAs={'undefined'}
-        />
-
-        <FieldError name="parentId" className="rw-field-error" />
-
-        <Label
           name="kindId"
           className="rw-label"
           errorClassName="rw-label rw-label-error"
@@ -79,14 +61,14 @@ const ResourceForm = (props: ResourceFormProps) => {
         </Label>
 
         <TextField
-          name="kindId"
-          defaultValue={props.resource?.kindId}
+          name="resourceKindId"
+          defaultValue={props.resource?.resourceKindId}
           className="rw-input"
           errorClassName="rw-input rw-input-error"
           validation={{ required: "Povinné pole" }}
         />
 
-        <FieldError name="kindId" className="rw-field-error" />
+        <FieldError name="resourceKindId" className="rw-field-error" />
 
         <div className="rw-button-group">
           <Submit disabled={props.loading} className="rw-button rw-button-blue">

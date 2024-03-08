@@ -74,38 +74,19 @@ export default async () => {
       { id: 'Dokumentace a provoz', name: 'Dokumentace a provoz', code: '9231', parentOrganizationalUnitId: 'Technický úsek' },
     ]
     if ((await db.organizationalUnit.count()) === 0) {
-      await Promise.all(
-        organizationalUnitData.map(async (data: Prisma.OrganizationalUnitCreateArgs['data']) => {
-          const record = await db.organizationalUnit.create({ data })
-          console.log(record)
-        })
-      )
+      for (const data of organizationalUnitData) {
+        const record = await db.organizationalUnit.create({ data })
+        console.log(record)
+      }
     } else {
       console.log('Organizational units already seeded')
     }
 
-    // ResourceLeaveType entity
-    const resourceLeaveTypeData: Prisma.ResourceLeaveTypeCreateArgs['data'][] = [
-      { id: 'Dovolená', name: 'Dovolená' },
-      { id: 'Nemoc', name: 'Nemoc' },
-      { id: 'Opravy a údržba', name: 'Opravy a údržba' },
-    ]
-    if ((await db.resourceLeaveType.count()) === 0) {
-      await Promise.all(
-        resourceLeaveTypeData.map(async (data: Prisma.ResourceLeaveTypeCreateArgs['data']) => {
-          const record = await db.resourceLeaveType.create({ data })
-          console.log(record)
-        })
-      )
-    } else {
-      console.log('Resource leave types already seeded')
-    }
-
     // ResourceKind entity
     const resourceKindData: Prisma.ResourceKindCreateArgs['data'][] = [
-      { id: 'Letadlo', name: 'Letadlo', hourlyCost: 1000, validResourceLeaveTypes: { connect: [{ id: 'Opravy a údržba' }] } },
-      { id: 'Zaměstnanec fulltime', name: 'Zaměstnanec fulltime', hourlyCost: 100, validResourceLeaveTypes: { connect: [{ id: 'Dovolená' }, { id: 'Nemoc' }] } },
-      { id: 'Zaměstnanec parttime', name: 'Zaměstnanec parttime', hourlyCost: 100, validResourceLeaveTypes: { connect: [{ id: 'Dovolená' }, { id: 'Nemoc' }] } },
+      { id: 'Letadlo', name: 'Letadlo', hourlyCost: 1000, workingHoursSchemaId: '24/7' },
+      { id: 'Zaměstnanec fulltime', name: 'Zaměstnanec fulltime', hourlyCost: 100, workingHoursSchemaId: '8/5 no holidays' },
+      { id: 'Zaměstnanec parttime', name: 'Zaměstnanec parttime', hourlyCost: 100, workingHoursSchemaId: '4/5 no holidays' },
     ]
     if ((await db.resourceKind.count()) === 0) {
       await Promise.all(
@@ -138,68 +119,60 @@ export default async () => {
       console.log('Resource capabilities already seeded')
     }
 
-    // {
-    //   id: 'Pokorný Luboš',
-    //   name: 'Pokorný Luboš',
-    //   resourceCapabilities: { connect: [{ id: 'Konstruktér' }] },
-    //   resourceKind: { connect: { id: 'Zaměstnanec parttime' } },
-    //   activeSince: new Date('2024-01-01'),
-    //   activeUntil: new Date('2024-03-31'),
-    //   workingHoursSchema: { connect: { id: '4/5 with holidaysOnWorkDays' } },
-    //   organizationalUnit: { connect: { id: 'Vývoj' } },
-    // },
-    // {
-    //   id: 'Kovář Jan',
-    //   name: 'Kovář Jan',
-    //   resourceCapabilities: { connect: [{ id: 'Technolog' }] },
-    //   resourceKind: { connect: { id: 'Zaměstnanec fulltime' } },
-    //   activeSince: new Date('2024-04-01'),
-    //   activeUntil: undefined,
-    //   workingHoursSchema: { connect: { id: '8/5 with holidays' } },
-    //   organizationalUnit: { connect: { id: 'Vývojová zkušebna' } },
-    // },
-    // {
-    //   id: 'Kučera Jiří',
-    //   name: 'Kučera Jiří',
-    //   resourceCapabilities: { connect: [{ id: 'Projektant' }] },
-    //   resourceKind: { connect: { id: 'Zaměstnanec fulltime' } },
-    //   activeSince: new Date('2024-02-01'),
-    //   activeUntil: undefined,
-    //   workingHoursSchema: { connect: { id: '8/5 with holidaysOnWorkingDays' } },
-    //   organizationalUnit: { connect: { id: 'Projekční a technické analýzy' } },
-    // },
-    // {
-    //   id: 'Krejčí Pavel',
-    //   name: 'Krejčí Pavel',
-    //   resourceCapabilities: { connect: [{ id: 'Zkušebn technik' }] },
-    //   resourceKind: { connect: { id: 'Zaměstnanec fulltime' } },
-    //   activeSince: new Date('2024-01-01'),
-    //   activeUntil: new Date('2024-07-31'),
-    //   workingHoursSchema: { connect: { id: '8/7 with holidays' } },
-    //   organizationalUnit: { connect: { id: 'Vývojová zkušebna' } },
-    // },
-
-
     // Resource entity
     const resourceData: Prisma.ResourceCreateArgs['data'][] = [
       {
-        id: 'Novák Petr',
+        id: 'clthhn0l9000008lbgw0wbhmu',
         name: 'Novák Petr',
         resourceCapabilities: { connect: [{ id: 'Vedoucí pracovník' }] },
-        resourceKind: { connect: { id: 'Zaměstnanec fulltime' } },
+        resourceKindId: 'Zaměstnanec fulltime',
         activeSince: new Date('2021-01-01'),
         activeUntil: undefined,
-        workingHoursSchema: { connect: { id: '8/5 no holidays' } },
-        organizationalUnit: { connect: { id: 'Technický úsek' } },
+        organizationalUnitId: 'Technický úsek',
       },
       {
-        id: '5001',
+        id: 'clthhn6ri000108lb3gkx7c77',
         name: '5001',
-        resourceKind: { connect: { id: 'Letadlo' } },
+        resourceKindId: 'Letadlo',
         activeSince: new Date('2024-01-01'),
         activeUntil: undefined,
-        workingHoursSchema: { connect: { id: '24/7' } },
-        organizationalUnit: { connect: { id: 'TODO majitel letadla' } },
+        organizationalUnitId: 'TODO majitel letadla',
+      },
+      {
+        id: 'clthhnhbk000208lb3ik4gvsq',
+        name: 'Pokorný Luboš',
+        resourceCapabilities: { connect: [{ id: 'Konstruktér' }] },
+        resourceKindId: 'Zaměstnanec parttime',
+        activeSince: new Date('2024-01-01'),
+        activeUntil: new Date('2024-03-31'),
+        organizationalUnitId: 'Vývoj',
+      },
+      {
+        id: 'clthhnp1p000308lbb68x2avh',
+        name: 'Kovář Jan',
+        resourceCapabilities: { connect: [{ id: 'Technolog' }] },
+        resourceKindId: 'Zaměstnanec fulltime',
+        activeSince: new Date('2024-04-01'),
+        activeUntil: undefined,
+        organizationalUnitId: 'Vývojová zkušebna',
+      },
+      {
+        id: 'clthhnw8d000408lbegmq2bdn',
+        name: 'Kučera Jiří',
+        resourceCapabilities: { connect: [{ id: 'Projektant' }] },
+        resourceKindId: 'Zaměstnanec fulltime',
+        activeSince: new Date('2024-02-01'),
+        activeUntil: undefined,
+        organizationalUnitId: 'Projekční a technické analýzy',
+      },
+      {
+        id: 'clthho36g000508lb5k5w3sp9',
+        name: 'Krejčí Pavel',
+        resourceCapabilities: { connect: [{ id: 'Zkušební technik' }] },
+        resourceKindId: 'Zaměstnanec fulltime',
+        activeSince: new Date('2024-01-01'),
+        activeUntil: new Date('2024-07-31'),
+        organizationalUnitId: 'Vývojová zkušebna',
       },
     ]
     if ((await db.resource.count()) === 0) {
@@ -213,7 +186,7 @@ export default async () => {
       console.log('Resources already seeded')
     }
 
-    // ResourceLeave entity
+    // ResourceLeave entity TODO
     const resourceLeaveData: Prisma.ResourceLeaveCreateArgs['data'][] = [
 
     ]
@@ -228,7 +201,7 @@ export default async () => {
       console.log('Resource leaves already seeded')
     }
 
-    // ResourceAvailabilityOverride entity
+    // ResourceAvailabilityOverride entity TODO
     const resourceAvailabilityOverrideData: Prisma.ResourceAvailabilityOverrideCreateArgs['data'][] = [
 
     ]

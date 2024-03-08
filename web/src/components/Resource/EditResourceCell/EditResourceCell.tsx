@@ -20,8 +20,11 @@ export const QUERY: TypedDocumentNode<EditResourceById> = gql`
     resource: resource(id: $id) {
       id
       name
-      managerId
       resourceKindId
+      resourceKind {
+        id
+        name
+      }
       createdAt
       updatedAt
     }
@@ -36,7 +39,6 @@ const UPDATE_RESOURCE_MUTATION: TypedDocumentNode<
     updateResource(id: $id, input: $input) {
       id
       name
-      managerId
       resourceKindId
       createdAt
       updatedAt

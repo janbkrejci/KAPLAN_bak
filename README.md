@@ -70,3 +70,14 @@ later
 yarn rw deploy baremetal production
 ```
 
+# backup
+
+```
+sqlite3 /var/www/app/db/kaplan.db ".backup 'backup_file.sq3'"
+```
+
+# restore
+
+```
+sqlite3 /var/www/app/db/kaplan.db ".restore 'backup_file.sq3'"
+```

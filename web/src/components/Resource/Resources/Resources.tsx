@@ -51,7 +51,6 @@ const ResourcesList = ({ resources }: FindResources) => {
           <tr>
             <th>ID</th>
             <th>Název</th>
-            <th>Nadřízený</th>
             <th>Typ</th>
             <th>Vytvořen</th>
             <th>Aktualizován</th>
@@ -63,8 +62,7 @@ const ResourcesList = ({ resources }: FindResources) => {
             <tr key={resource.id}>
               <td>{truncate(resource.id)}</td>
               <td>{truncate(resource.name)}</td>
-              <td>{truncate(resource.parent?.name || '')}</td>
-              <td>{truncate(resource.kind.name)}</td>
+              <td>{truncate(resource.resourceKind.name)}</td>
               <td>{timeTag(resource.createdAt)}</td>
               <td>{timeTag(resource.updatedAt)}</td>
               <td>

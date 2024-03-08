@@ -7,10 +7,10 @@
     ]
   },
   "devDependencies": {
-    "@redwoodjs/cli-data-migrate": "7.0.6",
-    "@redwoodjs/core": "7.0.6",
-    "@redwoodjs/eslint-config": "7.0.6",
-    "@redwoodjs/project-config": "7.0.6",
+    "@redwoodjs/cli-data-migrate": "7.0.7",
+    "@redwoodjs/core": "7.0.7",
+    "@redwoodjs/eslint-config": "7.0.7",
+    "@redwoodjs/project-config": "7.0.7",
     "@redwoodjs/studio": "11",
     "@typescript-eslint/eslint-plugin": "^7.1.1",
     "@typescript-eslint/parser": "^7.1.1",

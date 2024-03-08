@@ -1,4 +1,4 @@
-import type { ResourceKind } from '@prisma/client'
+import type { ResourceKind } from "@prisma/client";
 
 import {
   resourceKinds,
@@ -6,8 +6,8 @@ import {
   createResourceKind,
   updateResourceKind,
   deleteResourceKind,
-} from './resourceKinds'
-import type { StandardScenario } from './resourceKinds.scenarios'
+} from "./resourceKinds";
+import type { StandardScenario } from "./resourceKinds.scenarios";
 
 // Generated boilerplate tests do not account for all circumstances
 // and can fail without adjustments, e.g. Float.
@@ -15,54 +15,56 @@ import type { StandardScenario } from './resourceKinds.scenarios'
 //       https://redwoodjs.com/docs/testing#testing-services
 // https://redwoodjs.com/docs/testing#jest-expect-type-considerations
 
-describe('resourceKinds', () => {
-  scenario('returns all resourceKinds', async (scenario: StandardScenario) => {
-    const result = await resourceKinds()
+describe("resourceKinds", () => {
+  scenario("returns all resourceKinds", async (scenario: StandardScenario) => {
+    const result = await resourceKinds();
 
-    expect(result.length).toEqual(Object.keys(scenario.resourceKind).length)
-  })
+    expect(result.length).toEqual(Object.keys(scenario.resourceKind).length);
+  });
 
   scenario(
-    'returns a single resourceKind',
+    "returns a single resourceKind",
     async (scenario: StandardScenario) => {
-      const result = await resourceKind({ id: scenario.resourceKind.one.id })
+      const result = await resourceKind({ id: scenario.resourceKind.one.id });
 
-      expect(result).toEqual(scenario.resourceKind.one)
+      expect(result).toEqual(scenario.resourceKind.one);
     }
-  )
+  );
 
-  scenario('creates a resourceKind', async () => {
+  scenario("creates a resourceKind", async (scenario: StandardScenario) => {
     const result = await createResourceKind({
       input: {
-        name: 'String9108974',
-        hourlyCost: 7419049.223728591,
-        updatedAt: '2024-03-05T15:40:32.761Z',
+        name: "String8779340",
+        hourlyCost: 7433930.933861195,
+        workingHoursSchemaId: scenario.resourceKind.two.workingHoursSchemaId,
       },
-    })
+    });
 
-    expect(result.name).toEqual('String9108974')
-    expect(result.hourlyCost).toEqual(7419049.223728591)
-    expect(result.updatedAt).toEqual(new Date('2024-03-05T15:40:32.761Z'))
-  })
+    expect(result.name).toEqual("String8779340");
+    expect(result.hourlyCost).toEqual(7433930.933861195);
+    expect(result.workingHoursSchemaId).toEqual(
+      scenario.resourceKind.two.workingHoursSchemaId
+    );
+  });
 
-  scenario('updates a resourceKind', async (scenario: StandardScenario) => {
+  scenario("updates a resourceKind", async (scenario: StandardScenario) => {
     const original = (await resourceKind({
       id: scenario.resourceKind.one.id,
-    })) as ResourceKind
+    })) as ResourceKind;
     const result = await updateResourceKind({
       id: original.id,
-      input: { name: 'String56077432' },
-    })
+      input: { name: "String66548422" },
+    });
 
-    expect(result.name).toEqual('String56077432')
-  })
+    expect(result.name).toEqual("String66548422");
+  });
 
-  scenario('deletes a resourceKind', async (scenario: StandardScenario) => {
+  scenario("deletes a resourceKind", async (scenario: StandardScenario) => {
     const original = (await deleteResourceKind({
       id: scenario.resourceKind.one.id,
-    })) as ResourceKind
-    const result = await resourceKind({ id: original.id })
+    })) as ResourceKind;
+    const result = await resourceKind({ id: original.id });
 
-    expect(result).toEqual(null)
-  })
-})
+    expect(result).toEqual(null);
+  });
+});

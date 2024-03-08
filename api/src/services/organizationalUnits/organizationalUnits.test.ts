@@ -1,4 +1,4 @@
-import type { OrganizationalUnit } from '@prisma/client'
+import type { OrganizationalUnit } from "@prisma/client";
 
 import {
   organizationalUnits,
@@ -6,8 +6,8 @@ import {
   createOrganizationalUnit,
   updateOrganizationalUnit,
   deleteOrganizationalUnit,
-} from './organizationalUnits'
-import type { StandardScenario } from './organizationalUnits.scenarios'
+} from "./organizationalUnits";
+import type { StandardScenario } from "./organizationalUnits.scenarios";
 
 // Generated boilerplate tests do not account for all circumstances
 // and can fail without adjustments, e.g. Float.
@@ -15,62 +15,62 @@ import type { StandardScenario } from './organizationalUnits.scenarios'
 //       https://redwoodjs.com/docs/testing#testing-services
 // https://redwoodjs.com/docs/testing#jest-expect-type-considerations
 
-describe('organizationalUnits', () => {
+describe("organizationalUnits", () => {
   scenario(
-    'returns all organizationalUnits',
+    "returns all organizationalUnits",
     async (scenario: StandardScenario) => {
-      const result = await organizationalUnits()
+      const result = await organizationalUnits();
 
       expect(result.length).toEqual(
         Object.keys(scenario.organizationalUnit).length
-      )
+      );
     }
-  )
+  );
 
   scenario(
-    'returns a single organizationalUnit',
+    "returns a single organizationalUnit",
     async (scenario: StandardScenario) => {
       const result = await organizationalUnit({
         id: scenario.organizationalUnit.one.id,
-      })
+      });
 
-      expect(result).toEqual(scenario.organizationalUnit.one)
+      expect(result).toEqual(scenario.organizationalUnit.one);
     }
-  )
+  );
 
-  scenario('creates a organizationalUnit', async () => {
+  scenario("creates a organizationalUnit", async () => {
     const result = await createOrganizationalUnit({
-      input: { code: 'String5943428', name: 'String' },
-    })
+      input: { code: "String4016465", name: "String" },
+    });
 
-    expect(result.code).toEqual('String5943428')
-    expect(result.name).toEqual('String')
-  })
+    expect(result.code).toEqual("String4016465");
+    expect(result.name).toEqual("String");
+  });
 
   scenario(
-    'updates a organizationalUnit',
+    "updates a organizationalUnit",
     async (scenario: StandardScenario) => {
       const original = (await organizationalUnit({
         id: scenario.organizationalUnit.one.id,
-      })) as OrganizationalUnit
+      })) as OrganizationalUnit;
       const result = await updateOrganizationalUnit({
         id: original.id,
-        input: { code: 'String56664502' },
-      })
+        input: { code: "String39712272" },
+      });
 
-      expect(result.code).toEqual('String56664502')
+      expect(result.code).toEqual("String39712272");
     }
-  )
+  );
 
   scenario(
-    'deletes a organizationalUnit',
+    "deletes a organizationalUnit",
     async (scenario: StandardScenario) => {
       const original = (await deleteOrganizationalUnit({
         id: scenario.organizationalUnit.one.id,
-      })) as OrganizationalUnit
-      const result = await organizationalUnit({ id: original.id })
+      })) as OrganizationalUnit;
+      const result = await organizationalUnit({ id: original.id });
 
-      expect(result).toEqual(null)
+      expect(result).toEqual(null);
     }
-  )
-})
+  );
+});

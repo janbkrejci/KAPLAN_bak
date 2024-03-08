@@ -62,12 +62,8 @@ const Resource = ({ resource }: Props) => {
               <td>{resource.name}</td>
             </tr>
             <tr>
-              <th>Nadřízený</th>
-              <td>{resource.parent?.name}</td>
-            </tr>
-            <tr>
               <th>Typ</th>
-              <td>{resource.kind?.name}</td>
+              <td>{resource.resourceKind?.name}</td>
             </tr>
             <tr>
               <th>Vytvořen</th>

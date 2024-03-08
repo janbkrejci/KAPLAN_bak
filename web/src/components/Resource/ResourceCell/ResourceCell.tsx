@@ -16,11 +16,6 @@ export const QUERY: TypedDocumentNode<
     resource: resource(id: $id) {
       id
       name
-      managerId
-      manager {
-        id
-        name
-      }
       resourceKindId
       resourceKind {
         id
