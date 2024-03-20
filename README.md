@@ -91,7 +91,7 @@ yarn rw prisma studio
 
 [here](https://prisma-editor.vercel.app/schema/4154)
 
-# Squash migrations
+# Squash migrations - incomplete
 
 1) generate empty migration dir 000000000000_squashed_migrations and delete the others
 2) cd to api/db

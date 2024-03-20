@@ -61,5 +61,5 @@ export const Resource: ResourceRelationResolvers = {
     return db.resource
       .findUnique({ where: { id: root?.id } })
       .organizationalUnit();
-  },
+  }
 };
