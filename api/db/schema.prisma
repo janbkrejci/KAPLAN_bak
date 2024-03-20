@@ -5,7 +5,7 @@ datasource db {
 
 generator client {
   provider      = "prisma-client-js"
-  binaryTargets = ["darwin", "rhel-openssl-1.0.x"]
+  binaryTargets = ["darwin", "rhel-openssl-1.0.x", "debian-openssl-3.0.x"]
 }
 
 // Don't forget to tell Prisma about your edits to this file using
@@ -13,14 +13,14 @@ generator client {
 // `migrate` is like committing while `push` is for prototyping.
 // Read more about both here:
 // https:
-//                                                                     Define your own datamodels here and run `yarn redwood prisma migrate dev`
-//                                                                     to create migrations for them and apply to your dev DB.
-//                                                                     TODO: Please remove the following example:
-//                             Zdroj
+//                                                                        Define your own datamodels here and run `yarn redwood prisma migrate dev`
+//                                                                        to create migrations for them and apply to your dev DB.
+//                                                                        TODO: Please remove the following example:
+//                                Zdroj
 
 model Resource {
   id                            String                         @id @default(cuid())
-  name                          String
+  name                          String                         @unique
   resourceKind                  ResourceKind                   @relation(name: "ResourceToResourceKind", fields: [resourceKindId], references: [id])
   resourceKindId                String
   resourceCapabilities          ResourceCapability[]           @relation(name: "ResourceToResourceCapability")
@@ -63,7 +63,7 @@ model ResourceCapability {
 
 model WorkingHoursSchema {
   id               String         @id @default(cuid())
-  name             String
+  name             String         @unique
   resourcekinds    ResourceKind[] @relation(name: "WorkingHoursSchemaToResourceKind")
   monday           Float          @default(8)
   tuesday          Float          @default(8)
@@ -84,8 +84,8 @@ model WorkingHoursSchema {
 model ResourceLeave {
   id                   String    @id @default(cuid())
   description          String
-  from                 DateTime
-  to                   DateTime
+  dateFrom             DateTime
+  dateTo               DateTime
   firstDayWorkingHours Float
   lastDayWorkingHours  Float
   resource             Resource  @relation(name: "ResourceLeaveToResource", fields: [resourceId], references: [id])
@@ -102,7 +102,7 @@ model ResourceLeave {
 
 model NationalHoliday {
   id        String    @id @default(cuid())
-  name      String
+  name      String    @unique
   day       Int
   month     Int
   year      Int?
@@ -128,7 +128,7 @@ model ResourceAvailabilityOverride {
 model OrganizationalUnit {
   id                         String               @id @default(cuid())
   code                       String               @unique
-  name                       String
+  name                       String               @unique
   description                String?
   parentOrganizationalUnit   OrganizationalUnit?  @relation(name: "OrganizationalUnitToOrganizationalUnit", fields: [parentOrganizationalUnitId], references: [id])
   parentOrganizationalUnitId String?

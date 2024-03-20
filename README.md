@@ -81,3 +81,12 @@ sqlite3 /var/www/app/db/kaplan.db ".backup 'backup_file.sq3'"
 ```
 sqlite3 /var/www/app/db/kaplan.db ".restore 'backup_file.sq3'"
 ```
+
+# Prisma studio
+```
+yarn rw prisma studio
+```
+
+# Prisma schema generator
+
+[here](https://prisma-editor.vercel.app/schema/4154)
